@@ -3,13 +3,14 @@ const store = require("./store");
 //7) Definir todo lo que sucede creando las functions necesarias
 
 
-function addMessage(user, message) {
+function addMessage(chat, user, message) {
   return new Promise((resolve, reject) => {
     if (!user || !message) {
       console.error("[messageController] No hay usuario o mensaje");
       return reject("No se pudo enviar mensaje, datos incorrectos");
     }
     const fullMessage = {
+      chat: chat,
       user: user,
       message: message,
       date: new Date()
