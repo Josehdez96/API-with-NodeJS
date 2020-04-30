@@ -1,4 +1,5 @@
 const store = require("./store");
+const { socket } = require("../../socket");
 
 //7) Definir todo lo que sucede creando las functions necesarias
 
@@ -24,7 +25,10 @@ function addMessage(chat, user, message, file) {
     };  
 
     store.add(fullMessage);
-    resolve(fullMessage);
+
+    socket.io.emit("message", fullMessage) 
+
+    resolve(fullMessage); //Resuelve la promesa
   })
 };
 
