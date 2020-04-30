@@ -6,7 +6,7 @@ const router = express.Router(); //3)Invoco Router para trabajar con verbos HTTP
 const controller = require("./controller") //7) Trae al controlador de funciones
 
 const upload = multer({ //Que queremos hacer con el multer
-  dest: "uploads/", //mandar los archivos a uploads
+  dest: "public/files/", //mandar los archivos a uploads/files/
 }) 
 
 router.get("/", function (req, res) { //4)Atiende peticiones GET
@@ -22,7 +22,7 @@ router.get("/", function (req, res) { //4)Atiende peticiones GET
 
 router.post("/", upload.single("file"),function (req, res) {  //||upload.single("file")|| le decimos a multer de donde sacar el archivo con||.single|| solo tiene un archivo y ||("file")|| le decimos el nombre del archivo
 
-  controller.addMessage(req.body.chat, req.body.user, req.body.message)
+  controller.addMessage(req.body.chat, req.body.user, req.body.message, req.file) //||req.file|| consigue la información del archivo
     .then((fullMessage) => {
       response.success(req, res, fullMessage, 201);
     })
