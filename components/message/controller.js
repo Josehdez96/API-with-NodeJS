@@ -1,6 +1,8 @@
 const store = require("./store");
 const { socket } = require("../../socket");
 
+const config = require("../../config");
+
 //7) Definir todo lo que sucede creando las functions necesarias
 
 
@@ -13,7 +15,7 @@ function addMessage(chat, user, message, file) {
 
     let fileUrl = ""; //Preparamos un file URL
     if (file) {
-      fileUrl = "http://localhost:3000/app/files/" + file.filename;
+      fileUrl = `${config.host}:${config.port}${config.publicRoute}${config.filesRoute}` + file.filename;
     }
 
     const fullMessage = {

@@ -5,8 +5,10 @@ const response = require("../../network/response")
 const router = express.Router(); //3)Invoco Router para trabajar con verbos HTTP
 const controller = require("./controller") //7) Trae al controlador de funciones
 
+const config = require("../../config")
+
 const upload = multer({ //Que queremos hacer con el multer
-  dest: "public/files/", //mandar los archivos a uploads/files/
+  dest: "public" + config.filesRoute, //mandar los archivos a uploads/files/
 }) 
 
 router.get("/", function (req, res) { //4)Atiende peticiones GET

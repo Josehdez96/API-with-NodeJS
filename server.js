@@ -8,7 +8,9 @@ const socket = require("./socket")
 const db = require("./db"); //Trae la conexión a la  DB
 const router = require("./network/routes"); //3.1)Trae el router que permite usar verbos HTTP
 
-db("mongodb+srv://db_user_practice:12345678a@cluster0-u3ayl.mongodb.net/test"); //llama la URL de la DB para conectarla
+const config = require("./config");
+
+db(config.dbUrl); //llama la URL de la DB para conectarla
 
 app.use(cors());
 
@@ -18,8 +20,8 @@ socket.connect(server);
 
 router(app); //3.2)Activar router
 
-app.use("/app", express.static("public"));
+app.use(publicRoute, express.static("public"));
 
-server.listen(3000, function () { //2)Asegurarnos (con este callback) que el servidor escuchará en el puerto 3000
-  console.log("La aplicación está escuchando en http://localhost:3000");
+server.listen(config.port, function () { //2)Asegurarnos (con este callback) que el servidor escuchará en el puerto 3000
+  console.log("La aplicación está escuchando en " + config.host + ":" + config.port);
 }); 
